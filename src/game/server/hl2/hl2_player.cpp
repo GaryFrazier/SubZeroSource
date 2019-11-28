@@ -87,8 +87,8 @@ ConVar hl2_darkness_flashlight_factor ( "hl2_darkness_flashlight_factor", "1" );
 
 #ifdef HL2MP
 	#define	HL2_WALK_SPEED 100
-	#define	HL2_NORM_SPEED 100
-	#define	HL2_SPRINT_SPEED 160
+	#define	HL2_NORM_SPEED 150
+	#define	HL2_SPRINT_SPEED 200
 #else
 	#define	HL2_WALK_SPEED hl2_walkspeed.GetFloat()
 	#define	HL2_NORM_SPEED hl2_normspeed.GetFloat()
