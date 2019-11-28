@@ -867,10 +867,10 @@ void CHL2_Player::PreThink(void)
 	// Update weapon's ready status
 	UpdateWeaponPosture();
 
-	// Disallow shooting while zooming
+	// Disallow shooting while zooming szs: and sprinting
 	if ( IsX360() )
 	{
-		if ( IsZooming() )
+		if (IsZooming() || m_nButtons & IN_SPEED)
 		{
 			if( GetActiveWeapon() && !GetActiveWeapon()->IsWeaponZoomed() )
 			{
@@ -881,7 +881,7 @@ void CHL2_Player::PreThink(void)
 	}
 	else
 	{
-		if ( m_nButtons & IN_ZOOM )
+		if (m_nButtons & IN_ZOOM || m_nButtons & IN_SPEED)
 		{
 			//FIXME: Held weapons like the grenade get sad when this happens
 	#ifdef HL2_EPISODIC
@@ -1217,6 +1217,7 @@ void CHL2_Player::StartSprinting( void )
 
 	SetMaxSpeed( HL2_SPRINT_SPEED );
 	m_fIsSprinting = true;
+	Weapon_Lower(); // szs: can't use weapon during sprinting
 }
 
 
@@ -1239,6 +1240,7 @@ void CHL2_Player::StopSprinting( void )
 	}
 
 	m_fIsSprinting = false;
+	Weapon_Ready(); // szs: can't use weapon during sprinting
 
 	if ( sv_stickysprint.GetBool() )
 	{
@@ -3007,8 +3009,8 @@ void CHL2_Player::UpdateWeaponPosture( void )
 		}
 		else
 		{
-			if( !pWeapon->CanLower() && m_HL2Local.m_bWeaponLowered )
-				m_HL2Local.m_bWeaponLowered = false;
+			if (!pWeapon->CanLower() && m_HL2Local.m_bWeaponLowered){}
+				//m_HL2Local.m_bWeaponLowered = false; szs hack: why does this break stuff
 		}
 
 		if( !m_AutoaimTimer.Expired() )
