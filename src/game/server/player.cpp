@@ -190,7 +190,7 @@ ConVar  sv_player_net_suppress_usercommands( "sv_player_net_suppress_usercommand
 ConVar  sv_player_display_usercommand_errors( "sv_player_display_usercommand_errors", "0", FCVAR_CHEAT, "1 = Display warning when command values are out-of-range. 2 = Spew invalid ranges." );
 
 ConVar  player_debug_print_damage( "player_debug_print_damage", "0", FCVAR_CHEAT, "When true, print amount and type of all damage received by player to console." );
-
+ConVar	sk_player_weapons("sk_player_weapons", "0");
 
 void CC_GiveCurrentAmmo( void )
 {
@@ -5059,6 +5059,14 @@ void CBasePlayer::Spawn( void )
 	UpdateLastKnownArea();
 
 	m_weaponFiredTimer.Invalidate();
+
+	if (sk_player_weapons.GetBool())
+	{
+		// szs: start weapons
+		GiveAmmo(255, "Pistol");
+		GiveNamedItem("weapon_92fs");
+		GiveNamedItem("weapon_crowbar");
+	}
 }
 
 void CBasePlayer::Activate( void )
