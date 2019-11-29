@@ -84,9 +84,11 @@ void CWeaponAR2::Precache( void )
 
 	UTIL_PrecacheOther( "prop_combine_ball" );
 	UTIL_PrecacheOther( "env_entity_dissolver" );
+
 #endif
 	
 }
+
 
 //-----------------------------------------------------------------------------
 // Purpose: Handle grenade detonate in-air (even when no ammo is left)
