@@ -1141,7 +1141,7 @@ void CHL2_Player::Spawn(void)
 
 	GetPlayerProxy();
 
-	SetFlashlightPowerDrainScale( 1.0f );
+	SetFlashlightPowerDrainScale( 0.0f ); // szs: never drain
 }
 
 //-----------------------------------------------------------------------------
@@ -2027,8 +2027,8 @@ int CHL2_Player::FlashlightIsOn( void )
 //-----------------------------------------------------------------------------
 void CHL2_Player::FlashlightTurnOn( void )
 {
-	if( m_bFlashlightDisabled )
-		return;
+	//if( m_bFlashlightDisabled )
+		//return;
 
 	if ( Flashlight_UseLegacyVersion() )
 	{
